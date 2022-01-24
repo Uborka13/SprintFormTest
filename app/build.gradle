@@ -1,0 +1,82 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdk DefaultConfig.compileSdk
+
+    defaultConfig {
+        applicationId DefaultConfig.applicationId
+        minSdk DefaultConfig.minSdk
+        targetSdk DefaultConfig.targetSdk
+        versionCode DefaultConfig.versionCode
+        versionName DefaultConfig.versionName
+        buildConfigField "String", "SERVER_URL", '"https://uploads-ssl.webflow.com"'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation Dependencies.androidCore
+    implementation Dependencies.appCompat
+    implementation Dependencies.material
+    implementation Dependencies.constraintLayout
+    implementation Dependencies.brownie
+
+    // Android Hilt
+    implementation Dependencies.hiltAndroid
+    kapt Dependencies.hiltAndroidCompiler
+    implementation Dependencies.hiltLifecycleViewModel
+
+    // Navigation
+    implementation Dependencies.navigationFragmentKtx
+    implementation Dependencies.navigationUIKtx
+
+    // Retrofit
+    implementation Dependencies.retrofit
+    implementation Dependencies.retrofitMoshiConverter
+
+    // Moshi
+    implementation Dependencies.moshi
+    implementation Dependencies.moshiAdapters
+    kapt Dependencies.moshiKotlinCodegen
+
+    // okHttp
+    implementation Dependencies.loggingInterceptor
+
+    // Glide
+    implementation Dependencies.glide
+    kapt Dependencies.glideCompiler
+
+    // Coroutines
+    implementation Dependencies.kotlinCoroutinesCore
+
+    // Room
+    implementation Dependencies.roomRuntime
+    implementation Dependencies.roomKtx
+    kapt Dependencies.roomCompiler
+
+    // Leacanary
+    debugImplementation Dependencies.leakCanary
+}
