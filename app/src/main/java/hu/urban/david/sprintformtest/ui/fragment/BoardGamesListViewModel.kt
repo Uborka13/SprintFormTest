@@ -9,7 +9,6 @@ import hu.urban.david.sprintformtest.repository.BoardGameRepository
 import hu.urban.david.sprintformtest.ui.fragment.adapter.BoardGameItem
 import hu.urban.david.sprintformtest.ui.fragment.adapter.ItemState
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
@@ -35,7 +34,6 @@ class BoardGamesListViewModel @Inject constructor(
     private fun addFavoriteGame(action: BoardGamesListUIActions.Favorite) {
         viewModelScope.launch {
             setLoadingState(action)
-            delay(2000L)
             repository.addToFavorite(action.id)
             setSuccessState(action)
         }
@@ -44,7 +42,6 @@ class BoardGamesListViewModel @Inject constructor(
     private fun removeFavoriteGame(action: BoardGamesListUIActions.UnFavorite) {
         viewModelScope.launch {
             setLoadingState(action)
-            delay(2000L)
             repository.removeFromFavorite(action.id)
             setSuccessState(action)
         }
